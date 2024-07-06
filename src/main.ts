@@ -10,8 +10,9 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        package: 'emailModule',
-        protoPath: join(__dirname, 'modules', "email-manager", 'protos', 'email.proto'),
+        url: process.env.MS_URL!,
+        package: process.env.MS_PROTO_PACKAGE!,
+        protoPath: join(__dirname, 'modules', "email-manager", 'protos', 'Email.proto'),
       }
     }
   );

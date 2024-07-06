@@ -1,9 +1,8 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-package emailModule;
+package emailManager;
 
 service EmailService {
-  rpc sendEmail(EmailDto) returns (google.protobuf.BoolValue) {};
+  rpc sendEmail(EmailDto) returns (EmailResponse) {};
 }
 
 message EmailDto {
@@ -11,4 +10,8 @@ message EmailDto {
   string subject = 2;
   string text = 3;
   string html = 4;
+}
+
+message EmailResponse{
+  bool sent = 1;
 }

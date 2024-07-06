@@ -3,6 +3,7 @@ import * as Mail from 'nodemailer/lib/mailer';
 import * as nodeMailer from 'nodemailer';
 import { ConfigService } from "@nestjs/config";
 import { EmailDto } from "../dtos/email.dto";
+import { EmailResponse } from "../dtos/email-response.dto";
 
 @Injectable()
 export class EmailService {
@@ -16,7 +17,8 @@ export class EmailService {
      * @param emailDto EmailDto
      * 
      */
-    async sendEmail(emailDto: EmailDto): Promise<boolean> {
+    async sendEmail(emailDto: EmailDto): Promise<EmailResponse> {
+        let response: EmailResponse = { sent: false };
         try {
             let nodemailerTransport: Mail = nodeMailer.createTransport({
                 host: this.configService.get('EMAIL_HOST'),
@@ -35,9 +37,10 @@ export class EmailService {
                 html: emailDto.html
             };
             const info = await nodemailerTransport.sendMail(options);
-            return true;
+            response.sent = true;
+            return response;
         } catch (e) {
-            return false;
+            return response;
         }
     }
 }

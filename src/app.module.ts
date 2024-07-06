@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { EmailManager } from './modules/email-manager/email-manager.module';
+import { AppConstants } from './modules/email-manager/configs/app.constants';
 
 @Module({
   imports: [
@@ -9,20 +10,13 @@ import { EmailManager } from './modules/email-manager/email-manager.module';
     ConfigModule.forRoot({
       //load env parameters
       load: [() => ({
-        EMAIL_HOST: process.env.EMAIL_HOST,
-        EMAIL_PORT: process.env.EMAIL_PORT,
-        EMAIL_SECURE: process.env.EMAIL_SECURE,
-        EMAIL_USER: process.env.EMAIL_USER,
-        EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
-        EMAIL_SENDER: process.env.EMAIL_SENDER,
+        //MS
+        MS_URL: process.env.MS_URL,
+        MS_PROTO_PACKAGE: process.env.MS_PROTO_PACKAGE,
       })],
       validationSchema: Joi.object({
-        EMAIL_HOST: Joi.string().required(),
-        EMAIL_PORT: Joi.string().required(),
-        EMAIL_SECURE: Joi.string().required(),
-        EMAIL_USER: Joi.string().required(),
-        EMAIL_PASSWORD: Joi.string().required(),
-        EMAIL_SENDER: Joi.string().required(),
+        MS_URL: Joi.string().pattern(AppConstants.IP_PORT_REGEX).required(),
+        MS_PROTO_PACKAGE: Joi.string().required(),
       })
     }),
     //my modules
