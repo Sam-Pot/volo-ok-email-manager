@@ -39,7 +39,7 @@ import { DatabaseConstants } from './utils/database.constants';
                 password: configService.get('DB_PASSWORD'),
                 database: configService.get('DB_SCHEMA'),
                 //includes all entities inside "entity" directory of modules
-                entities: [join(__dirname, '..', '..', '*', 'entities', '*.entity{.ts,.js}')],
+                entities: [join(__dirname, '..', '..','modules', '*', 'entities', '*.entity{.ts,.js}')],
                 //sync DB with model entities (do NOT use in production to avoid data loss!!!)
                 synchronize: configService.get('DB_SYNCH'),
             })
