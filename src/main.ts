@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';
+import { Http2gRPCExceptionFilter } from './shared-modules/filters/http-exception-filter';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -24,6 +25,7 @@ async function bootstrap() {
       transform: true,
     }
   ));
+  app.useGlobalFilters(new Http2gRPCExceptionFilter())
 
   await app.listen();
 }
