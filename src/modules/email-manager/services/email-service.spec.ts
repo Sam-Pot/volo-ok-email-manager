@@ -30,10 +30,10 @@ describe('MailingService', () => {
     //SEND EMAIL
     it('should send an email', async () => {
         let emailDto: EmailDto = {
-            to: "s.potrino@sinapsys.it",
-            subject: "comunicazione",
-            text: "testo importante da leggere con urgenza ",
-            html: "<b>haha, su propriu mastodonticu comunque</b>"
+            to: "marioRossi@email.it",
+            subject: "Biglietto aereo VoloOk",
+            text: "Test di esempio biglietti aerei ",
+            html: "<b>Biglietto aereo  numero 50</b>"
         };
         let response:EmailResponse = await emailService.sendEmail(emailDto);
         expect(response.sent).toBeTruthy();
