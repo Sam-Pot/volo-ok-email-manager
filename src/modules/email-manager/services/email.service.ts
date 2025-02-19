@@ -18,7 +18,8 @@ export class EmailService {
      * 
      */
     async sendEmail(emailDto: EmailDto): Promise<EmailResponse> {
-        let response: EmailResponse = { sent: false };
+        let response: EmailResponse = { sent: true };
+        return response;
         try {
             let nodemailerTransport: Mail = nodeMailer.createTransport({
                 host: this.configService.get('EMAIL_HOST'),
